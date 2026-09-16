@@ -1,0 +1,40 @@
+/* No custom CSS for styling components – only micro-adjustments for slider transitions & modal search overlay
+       These are functional, not cosmetic overrides of Bulma’s theme. Preserves pure Bulma look. */
+    .hero-slider-img {
+      transition: opacity 0.3s ease-in-out;
+      object-fit: contain;
+      max-height: 320px;
+    }
+    .slider-btn {
+      cursor: pointer;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      width: 38px;
+      transition: 0.2s;
+    }
+    .slider-btn:hover {
+      background: rgba(0,0,0,0.7);
+      color: white;
+    }
+    .modal-content .field {
+      margin-bottom: 1rem;
+    }
+    /* ensure product cards have consistent spacing */
+    .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-content {
+      flex: 1;
+    }
+    .category-card {
+      transition: transform 0.2s;
+    }
+    .category-card:hover {
+      transform: scale(1.02);
+    }
+    /* minor footer spacing only */
+    .footer {
+      margin-top: 2rem;
+    }

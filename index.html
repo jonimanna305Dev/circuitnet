@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CircuitNest | Electronics & Mini Gear</title>
+  <!-- Bulma CSS (Pure, no custom CSS overrides – only minimal inline for slider behavior, no "castrom" style) -->
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome 6 (free icons) for search, troli, login, etc. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- ================================ NAVBAR (logo, search icon, troli icon, login/register button) ================================ -->
+  <nav class="navbar is-white is-fixed-top" style="box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#" style="font-weight: 700; font-size: 1.5rem;">
+          <i class="fas fa-microchip has-text-primary mr-2"></i> CircuitNest
+        </a>
+        <div class="navbar-burger" data-target="navMenu">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <!-- search icon (opens modal search bar) -->
+          <a class="navbar-item" id="searchIconBtn" style="cursor: pointer;">
+            <i class="fas fa-search"></i> <span class="ml-1 is-hidden-mobile">Search</span>
+          </a>
+          <!-- troli icon -> opens orders modal (show my orders) -->
+          <a class="navbar-item" id="troliModalBtn" style="cursor: pointer;">
+            <i class="fas fa-shopping-cart"></i> <span class="ml-1 is-hidden-mobile">My Orders</span>
+          </a>
+          <!-- login/register button -> opens login modal (simple demo) -->
+          <a class="navbar-item is-primary" id="loginRegisterBtn" style="cursor: pointer;">
+            <i class="fas fa-user-circle"></i> <span class="ml-1">Login / Register</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- spacer for fixed navbar -->
+  <div style="margin-top: 3.2rem;"></div>
+
+  <!-- ================================ HERO SECTION (left: text+button, right: product image slider) ================================ -->
+  <section class="section pt-4 pb-4">
+    <div class="container">
+      <div class="columns is-vcentered is-flex-wrap-wrap">
+        <!-- left side -->
+        <div class="column is-6">
+          <h1 class="title is-1 is-size-2-touch">⚡ Spark Your<br>Next Project</h1>
+          <p class="subtitle is-5 mt-3">Premium electronic circuits, sensors, mini gears & maker essentials. Fast shipping, genuine components.</p>
+          <a class="button is-primary is-large mt-3" href="#products-section">Shop Now <i class="fas fa-arrow-right ml-2"></i></a>
+          <div class="mt-5">
+            <span class="tag is-medium is-light mr-2"><i class="fas fa-shield-alt"></i> 1-Year Warranty</span>
+            <span class="tag is-medium is-light"><i class="fas fa-truck-fast"></i> Free Delivery over $40</span>
+          </div>
+        </div>
+        <!-- right side: product image slider -->
+        <div class="column is-6">
+          <div class="has-text-centered">
+            <div class="is-relative" style="min-height: 280px;">
+              <img id="heroSliderImg" class="hero-slider-img" src="image/Arduino Uno.jfif" alt="product slide" style="border-radius: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.1);">
+              <div class="level is-flex is-justify-content-center mt-3">
+                <span id="prevSlideBtn" class="slider-btn mr-3 p-2"><i class="fas fa-chevron-left"></i></span>
+                <span id="nextSlideBtn" class="slider-btn p-2"><i class="fas fa-chevron-right"></i></span>
+              </div>
+              <p class="is-size-7 has-text-grey mt-2">Featured products — explore our top picks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================ CATEGORY SECTION (category bar: image + name) ================================ -->
+  <section class="section pt-2 pb-2">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered mb-5">Shop by Category</h2>
+      <div class="columns is-multiline is-centered">
+        <!-- category items (each has image + name) -->
+        <div class="column is-3-tablet is-6-mobile">
+          <div class="card category-card has-text-centered p-3">
+            <div class="card-image">
+              <figure class="image is-128x128 is-inline-block">
+                <img src="https://placehold.co/300x200/1e88e5/white?text=MCU+Boards" alt="Microcontrollers" style="border-radius: 20px;">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Microcontrollers</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3-tablet is-6-mobile">
+          <div class="card category-card has-text-centered p-3">
+            <div class="card-image">
+              <figure class="image is-128x128 is-inline-block">
+                <img src="https://placehold.co/300x200/43a047/white?text=Sensors" alt="Sensors" style="border-radius: 20px;">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Sensors & Modules</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3-tablet is-6-mobile">
+          <div class="card category-card has-text-centered p-3">
+            <div class="card-image">
+              <figure class="image is-128x128 is-inline-block">
+                <img src="https://placehold.co/300x200/f57c00/white?text=Mini+Gear+Motors" alt="Mini Gears" style="border-radius: 20px;">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Mini Gear & Motors</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3-tablet is-6-mobile">
+          <div class="card category-card has-text-centered p-3">
+            <div class="card-image">
+              <figure class="image is-128x128 is-inline-block">
+                <img src="https://placehold.co/300x200/9c27b0/white?text=DIY+Kits" alt="DIY Kits" style="border-radius: 20px;">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">DIY Electronics Kits</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================ PRODUCT SECTION (cards: image, name, details, price, old price, discount %) ================================ -->
+  <section class="section" id="products-section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered mb-5">🔥 Hot Deals on Electronic & Mini Gear</h2>
+      <div class="columns is-multiline">
+        <!-- product 1 -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/Arduino Nano Compatible.jpg" alt="Arduino Nano" style="object-fit: contain;">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Arduino Nano Compatible</p>
+              <p class="subtitle is-6 has-text-grey-light">details: ATmega328P, mini USB, perfect for compact projects.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$18.90</span>
+                  <span class="has-text-grey ml-2"><s>$29.99</s></span>
+                  <span class="tag is-danger is-light ml-2">-37%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 2 -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/Micro Metal Gearmotor.jfif" alt="Mini Metal Gearmotor">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Micro Metal Gearmotor</p>
+              <p class="subtitle is-6 has-text-grey-light">details: 6V, 1000 RPM, high torque mini gear for robotics.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$12.50</span>
+                  <span class="has-text-grey ml-2"><s>$19.95</s></span>
+                  <span class="tag is-danger is-light ml-2">-37%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 3 -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/HC-SR04 Ultrasonic Sensor.jfif" alt="HC-SR04">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">HC-SR04 Ultrasonic Sensor</p>
+              <p class="subtitle is-6 has-text-grey-light">details: distance measurement 2cm-400cm, 5V compatible.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$4.20</span>
+                  <span class="has-text-grey ml-2"><s>$8.99</s></span>
+                  <span class="tag is-danger is-light ml-2">-53%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 4 -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/NodeMCU ESP8266 WiFi.jfif" alt="ESP8266 NodeMCU">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">NodeMCU ESP8266 WiFi</p>
+              <p class="subtitle is-6 has-text-grey-light">details: WiFi IoT module, CP2102, 4MB flash.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$10.90</span>
+                  <span class="has-text-grey ml-2"><s>$16.99</s></span>
+                  <span class="tag is-danger is-light ml-2">-36%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 5 (extra gear) -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/SG90 Micro Servo.jfif" alt="SG90 Micro Servo">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">SG90 Micro Servo</p>
+              <p class="subtitle is-6 has-text-grey-light">details: 9g mini servo, compatible with Arduino.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$5.49</span>
+                  <span class="has-text-grey ml-2"><s>$9.90</s></span>
+                  <span class="tag is-danger is-light ml-2">-44%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 6 -->
+        <div class="column is-3-desktop is-6-tablet is-12-mobile">
+          <div class="card">
+            <div class="card-image has-text-centered pt-4">
+              <figure class="image is-4by3" style="max-width: 200px; margin: 0 auto;">
+                <img src="image/Raspberry Pi Pico H.jfif" alt="Raspberry Pi Pico">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Raspberry Pi Pico H</p>
+              <p class="subtitle is-6 has-text-grey-light">details: RP2040 dual-core, pre-soldered headers.</p>
+              <div class="level is-mobile">
+                <div>
+                  <span class="title is-5 has-text-primary">$6.80</span>
+                  <span class="has-text-grey ml-2"><s>$12.00</s></span>
+                  <span class="tag is-danger is-light ml-2">-43%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================ FOOTER SECTION ================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-4">
+          <h3 class="title is-5"><i class="fas fa-microchip"></i> CircuitNest</h3>
+          <p>Your one-stop shop for electronic circuits, microcontrollers, sensors, and mini gear for makers and engineers.</p>
+        </div>
+        <div class="column is-4">
+          <h3 class="title is-5">Quick Links</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">Maker Community</a></li>
+          </ul>
+        </div>
+        <div class="column is-4">
+          <h3 class="title is-5">Follow Us</h3>
+          <div class="buttons">
+            <a class="button is-white"><i class="fab fa-twitter fa-lg"></i></a>
+            <a class="button is-white"><i class="fab fa-github fa-lg"></i></a>
+            <a class="button is-white"><i class="fab fa-instagram fa-lg"></i></a>
+          </div>
+          <p class="mt-3">© 2025 CircuitNest — Electrify your ideas.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL 1: SEARCH BAR (clicking search icon opens modal with search input) ============ -->
+  <div id="searchModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title"><i class="fas fa-search"></i> Search products</p>
+        <button class="delete" aria-label="close" id="closeSearchModalBtn"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">What electronic gear are you looking for?</label>
+          <div class="control">
+            <input class="input" type="text" id="searchInput" placeholder="e.g. Arduino, gear motor, sensor...">
+          </div>
+          <p class="help">Try "Arduino" or "servo" – Demo will highlight matching product titles.</p>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-primary" id="doSearchBtn">Search</button>
+          </div>
+          <div class="control">
+            <button class="button is-light" id="resetSearchHighlight">Reset</button>
+          </div>
+        </div>
+        <div id="searchFeedback" class="mt-3"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ MODAL 2: MY ORDERS (troli icon) - show orders list ============ -->
+  <div id="ordersModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title"><i class="fas fa-shopping-cart"></i> My Orders</p>
+        <button class="delete" aria-label="close" id="closeOrdersModalBtn"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="content">
+          <p><strong>Your recent orders:</strong></p>
+          <div class="box">
+            <ul>
+              <li><i class="fas fa-check-circle has-text-success"></i> Order #CIR-1001 - Arduino Nano · $18.90 · Delivered</li>
+              <li><i class="fas fa-check-circle has-text-success"></i> Order #CIR-1002 - Micro Metal Gearmotor · $12.50 · Shipped</li>
+              <li><i class="fas fa-clock has-text-warning"></i> Order #CIR-1003 - NodeMCU ESP8266 · $10.90 · Processing</li>
+            </ul>
+            <hr>
+            <p class="has-text-grey">Total orders: 3 | Total spent: $42.30 <br><span class="tag is-light">More items will appear after checkout simulation.</span></p>
+          </div>
+          <button class="button is-small is-light" id="simulateOrderBtn">+ Simulate New Order</button>
+          <p class="mt-3 help">Click to add a demo item to orders (just for demo)</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ MODAL 3: LOGIN / REGISTER ============ -->
+  <div id="loginModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title"><i class="fas fa-user-lock"></i> Login / Register</p>
+        <button class="delete" aria-label="close" id="closeLoginModalBtn"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="tabs is-toggle">
+          <ul>
+            <li id="loginTab" class="is-active"><a>Login</a></li>
+            <li id="registerTab"><a>Register</a></li>
+          </ul>
+        </div>
+        <div id="loginForm">
+          <div class="field">
+            <label class="label">Email</label>
+            <input class="input" type="email" id="loginEmail" placeholder="maker@circuitnest.com">
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <input class="input" type="password" id="loginPass" placeholder="••••••">
+          </div>
+          <button class="button is-primary is-fullwidth" id="doLoginBtn">Login</button>
+          <p class="has-text-centered mt-3">Demo: any email/pass → welcome toast</p>
+        </div>
+        <div id="registerForm" style="display: none;">
+          <div class="field">
+            <label class="label">Full name</label>
+            <input class="input" id="regName" placeholder="Alex Maker">
+          </div>
+          <div class="field">
+            <label class="label">Email</label>
+            <input class="input" id="regEmail" placeholder="alex@example.com">
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <input class="input" type="password" id="regPass" placeholder="create password">
+          </div>
+          <button class="button is-success is-fullwidth" id="doRegisterBtn">Register</button>
+        </div>
+        <div id="authFeedback" class="mt-3"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // --- HERO IMAGE SLIDER (right side product images) ---
+    const heroImages = [
+      "image/Arduino Uno.jfif",
+      "image/Micro Metal Gearmotor.jfif",
+      "image/Raspberry Pi Pico H.jfif",
+      "image/HC-SR04 Ultrasonic Sensor.jfif"
+    ];
+    let currentSlide = 0;
+    const heroImg = document.getElementById("heroSliderImg");
+    const prevBtn = document.getElementById("prevSlideBtn");
+    const nextBtn = document.getElementById("nextSlideBtn");
+    function updateSlide() {
+      heroImg.src = heroImages[currentSlide];
+    }
+    nextBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % heroImages.length;
+      updateSlide();
+    });
+    prevBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + heroImages.length) % heroImages.length;
+      updateSlide();
+    });
+
+    // --- MODAL HANDLERS (Search, Orders, Login) ---
+    const searchModal = document.getElementById("searchModal");
+    const ordersModal = document.getElementById("ordersModal");
+    const loginModal = document.getElementById("loginModal");
+
+    function openModal(modal) { modal.classList.add("is-active"); }
+    function closeModal(modal) { modal.classList.remove("is-active"); }
+
+    // search icon trigger
+    document.getElementById("searchIconBtn").addEventListener("click", () => openModal(searchModal));
+    document.getElementById("closeSearchModalBtn").addEventListener("click", () => closeModal(searchModal));
+    document.querySelectorAll("#searchModal .modal-background").forEach(el => el.addEventListener("click", () => closeModal(searchModal)));
+
+    // troli icon -> orders modal
+    document.getElementById("troliModalBtn").addEventListener("click", () => openModal(ordersModal));
+    document.getElementById("closeOrdersModalBtn").addEventListener("click", () => closeModal(ordersModal));
+    document.querySelectorAll("#ordersModal .modal-background").forEach(el => el.addEventListener("click", () => closeModal(ordersModal)));
+
+    // login/register button modal
+    document.getElementById("loginRegisterBtn").addEventListener("click", () => openModal(loginModal));
+    document.getElementById("closeLoginModalBtn").addEventListener("click", () => closeModal(loginModal));
+    document.querySelectorAll("#loginModal .modal-background").forEach(el => el.addEventListener("click", () => closeModal(loginModal)));
+
+    // Tabs inside login modal
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const loginFormDiv = document.getElementById("loginForm");
+    const registerFormDiv = document.getElementById("registerForm");
+    loginTab.addEventListener("click", () => {
+      loginTab.classList.add("is-active");
+      registerTab.classList.remove("is-active");
+      loginFormDiv.style.display = "block";
+      registerFormDiv.style.display = "none";
+    });
+    registerTab.addEventListener("click", () => {
+      registerTab.classList.add("is-active");
+      loginTab.classList.remove("is-active");
+      loginFormDiv.style.display = "none";
+      registerFormDiv.style.display = "block";
+    });
+    // simple auth feedback
+    document.getElementById("doLoginBtn").addEventListener("click", () => {
+      const feedback = document.getElementById("authFeedback");
+      feedback.innerHTML = `<div class="notification is-success">Welcome back (demo login successful)!</div>`;
+      setTimeout(() => feedback.innerHTML = "", 2000);
+      closeModal(loginModal);
+    });
+    document.getElementById("doRegisterBtn").addEventListener("click", () => {
+      const feedback = document.getElementById("authFeedback");
+      feedback.innerHTML = `<div class="notification is-info">Account created! You can now login.</div>`;
+      setTimeout(() => feedback.innerHTML = "", 2000);
+      closeModal(loginModal);
+    });
+
+    // SEARCH functionality: highlight product titles matching search text
+    const searchInput = document.getElementById("searchInput");
+    const doSearchBtn = document.getElementById("doSearchBtn");
+    const resetHighlightBtn = document.getElementById("resetSearchHighlight");
+    const productTitles = document.querySelectorAll("#products-section .card .card-content .title.is-6");
+    function resetHighlights() {
+      productTitles.forEach(title => {
+        title.style.backgroundColor = "";
+        title.style.transition = "";
+      });
+      document.getElementById("searchFeedback").innerHTML = "";
+    }
+    doSearchBtn.addEventListener("click", () => {
+      resetHighlights();
+      const term = searchInput.value.trim().toLowerCase();
+      if (term === "") {
+        document.getElementById("searchFeedback").innerHTML = '<div class="notification is-warning">Please enter a search term.</div>';
+        return;
+      }
+      let matchCount = 0;
+      productTitles.forEach(title => {
+        const text = title.innerText.toLowerCase();
+        if (text.includes(term)) {
+          title.style.backgroundColor = "#fff3cd";
+          title.style.borderRadius = "8px";
+          matchCount++;
+        }
+      });
+      const feedbackDiv = document.getElementById("searchFeedback");
+      if (matchCount > 0) feedbackDiv.innerHTML = `<div class="notification is-success">Found ${matchCount} matching product(s) highlighted.</div>`;
+      else feedbackDiv.innerHTML = `<div class="notification is-danger">No products matching "${term}". Try "sensor" or "servo".</div>`;
+    });
+    resetHighlightBtn.addEventListener("click", () => {
+      resetHighlights();
+      searchInput.value = "";
+      document.getElementById("searchFeedback").innerHTML = '<div class="notification is-light">Highlights cleared.</div>';
+    });
+
+    // Simulate new order in "My Orders" modal
+    const simulateBtn = document.getElementById("simulateOrderBtn");
+    const ordersList = document.querySelector("#ordersModal .modal-card-body .box ul");
+    simulateBtn.addEventListener("click", () => {
+      const newOrderItem = document.createElement("li");
+      newOrderItem.innerHTML = `<i class="fas fa-plus-circle has-text-info"></i> New Order #CIR-${Math.floor(Math.random()*9000+2000)} - Mini Gear Kit · $24.99 · Pending`;
+      ordersList.appendChild(newOrderItem);
+      const totalSpan = document.querySelector("#ordersModal .modal-card-body .box p");
+      if(totalSpan) totalSpan.innerHTML = `Latest order added — simulate checkout.`;
+    });
+
+    // mobile navbar burger (bulma vanilla)
+    document.addEventListener("DOMContentLoaded", () => {
+      const burger = document.querySelector(".navbar-burger");
+      const menu = document.querySelector("#navMenu");
+      if (burger && menu) {
+        burger.addEventListener("click", () => {
+          burger.classList.toggle("is-active");
+          menu.classList.toggle("is-active");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
